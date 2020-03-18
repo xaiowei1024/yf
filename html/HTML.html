@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="__INDEX__js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="__INDEX__layer/layer.js"></script>
+</head>
+<body>
+    <!-- 获取JQ复选选中值  开始-->
+    <script type="text/javascript">
+    //js获取select标签选中的值
+    var obj = document.getElementByIdx_x(”testSelect”); //定位id
+    var index = obj.selectedIndex; // 选中索引
+    var text = obj.options[index].text; // 选中文本
+    var value = obj.options[index].value; // 选中值
+
+    //jQuery中获得选中select值
+    //第一种方式
+    $('#testSelect option:selected').text();//选中的文本
+    $('#testSelect option:selected') .val();//选中的值
+    $("#testSelect ").get(0).selectedIndex;//索引
+
+    第二种方式
+    $("#tesetSelect").find("option:selected").text();//选中的文本
+    …….val();
+    …….get(0).selectedIndex;
+    </script>
+    <!-- 获取JQ复选选中值  结束-->
+
+
+
+    <!-- 根据手机类型来判定跳转地址  开始 -->
+    <script type="text/javascript">
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if(isAndroid){
+            window.location.href="安卓下载地址";
+        }
+        if(isiOS){
+            window.location.href="IOS下载地址";
+        }
+    </script>
+    <!-- 根据手机类型来判定跳转地址  结束 -->
+
+ 
+
+
+
+
+
+
+
+    <!-- HTML 不可编辑  -->
+    <input type="" name=""  disabled="disabled">
+    <input type="" name="" readonly="true" >
+    <input type="" name="" onfocus="this.blur()">
+    <input type="text" name="input1" value="晓艺" onfocus=this.blur() >
+    <!-- HTML 不可编辑  -->
+   
+
+    <!--  按钮不起作用   开始-->
+    <script type="text/javascript">
+        // 按钮不可点击
+        $("#id").attr("disabled","true");
+        $("#id").attr("disabled",true);
+        $("#id").attr("disabled","disabled");
+
+        //启用按钮
+        $("#id").removeAttr("disabled");
+        $("#id").attr("disabled",false);
+
+        //注意
+        $("#id").attr("disabled","false");//不起作用
+        //disabled只能禁用button，对超链接不起作用
+    </script>
+
+    <!--  按钮不起作用   结束-->
+
+
+    <!--  获取同一类名下的所有值   开始-->
+    <script type="text/javascript">
+        var btns = new Array();
+        $('.btn').each(function(key,value){
+            btns[key] = $(this).val();      
+            //如果是其他标签 用 html();
+            // 或btn[key] = $(value).val();
+        });
+        //也可以用字符串拼接
+        var btn = "";
+        $('.btn').each(function(){
+            btns = $(this).val();   
+            btn  = btn+btns+","    
+            //如果是其他标签 用 html();
+            // 或btn[key] = $(value).val();
+        });
+
+        //JQ删除字符串中最后一个字符
+        btn=btn.substring(0,btn.Length-1);
+        //注意：length  第一个字母：“l”一定要小写，“L”是错误的（Length），
+    </script>
+    <!--  获取同一类名下的所有值   结束-->
+
+
+<script type="text/javascript">
+    //最新AJAX验证
+    $.post("{:url('Member/info')}", {'mobile':mobile}, function(res)
+    {
+        if(1 == res.code){
+            layer.msg(res.msg, {icon: 1,time: 1000 }, function(){
+                location.reload();
+            });  
+            return false;
+        }else{
+           layer.msg(res.msg, {time: 1000 });
+        }
+    });
+    
+    //真实姓名验证
+	var regName =/^[\u4e00-\u9fa5]{2,4}$/;
+	if(!regName.test(truename)){
+	    // alert('真实姓名填写有误');
+	    layer.msg("真实姓名填写有误"); 
+	    return false;
+	}
+
+	//手机号验证
+	if(!is_mobile(mobile))
+	{
+    	layer.msg("请正确填写手机号码"); 
+	    return false;
+    }
+    function is_mobile(mobile)
+    {
+		var regularC = /^(0|86|17951)?(13[0-9]|15[0-9]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/;
+		if(!regularC.test(mobile))
+		{
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+
+	// 身份证验证
+	if(!IdentityCodeValid(id_card))
+	{
+		layer.msg("身份证号码错误"); 
+		return false;
+	}
+	function IdentityCodeValid(code) 
+	{ 
+        var city={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江 ",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北 ",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏 ",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外 "};
+        var tip = "";
+        var pass= true;
+
+        if(!code || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(code)){
+            tip = "身份证号格式错误";
+            pass = false;
+        }
+
+       else if(!city[code.substr(0,2)]){
+            tip = "地址编码错误";
+            pass = false;
+        }
+        else{
+            //18位身份证需要验证最后一位校验位
+            if(code.length == 18){
+                code = code.split('');
+                //∑(ai×Wi)(mod 11)
+                //加权因子
+                var factor = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ];
+                //校验位
+                var parity = [ 1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2 ];
+                var sum = 0;
+                var ai = 0;
+                var wi = 0;
+                for (var i = 0; i < 17; i++)
+                {
+                    ai = code[i];
+                    wi = factor[i];
+                    sum += ai * wi;
+                }
+                var last = parity[sum % 11];
+                if(parity[sum % 11] != code[17]){
+                    tip = "校验位错误";
+                    pass =false;
+                }
+            }
+        }
+        if(!pass)
+        {
+        	layer.msg(tip); 
+    		return false;
+        }
+        // alert(tip);
+        return pass;
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--                                                      插件类                                                               -->
+
+
+
+
+
+
+
+ <!-- 最新头像上传   开始 -->
+    <div class="way-list pic">
+        <span class="integral">头像</span>
+        <span class="no" style="margin-right: 9px;">
+            <img id="pic" src="{$headimgurl}">
+            <input id="upload" name="file" accept="image/*" type="file"  onchange="xmTanUploadImg(this)" style="display: none">
+            <!-- <span class="mui-icon mui-icon-arrowright"></span> -->
+        </span>
+    </div>
+    <script type="text/javascript">
+        //头像上传
+        $("#pic").click(function() {     
+            $('input[name="file"]').click();
+        });
+        function xmTanUploadImg(obj) {
+            var file = obj.files[0];
+            var data = new FormData();
+            data.append('file', file);
+            var index = layer.load(1, { shade: false }); //0代表加载的风格，支持0-2
+            $.ajax({
+                url: "{:url('Member/uploadImg')}",
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    // console.log(data);
+                    layer.msg(data.msg,{time: 1000});
+                    if (data.code==1) {
+                        var res = data.data.src;       
+                        $('#pic').attr('src',res);
+                    }
+                    layer.close(index); 
+                },
+                error: function() {
+                    layer.close(index);
+                    layer.msg('上传出错');
+                }
+            }); 
+        }
+    </script>
+    <!-- 最新头像上传 结束 -->
+
+
+
+<input onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"><br/> 
+
+    <!-- layui 时间参数 开始-->
+    <div class="hr-line-dashed type1" ></div>
+    <div class="form-group type1" >
+        <label class="col-sm-3 control-label">时间选择：</label>
+        <div class="input-group col-sm-2">
+            <input id="date1" type="text"  class="form-control" name="preup" required="" aria-required="true" >
+        </div>
+    </div>
+
+    <link href="__JS__/layui/css/layui.css" rel="stylesheet">
+    <!-- <script src="__JS__/plugins/layer/laydate/laydate.js"></script> -->
+    <script src="__JS__/layui/layui.js"></script>
+    <script type="text/javascript">
+        //layui  时间加载
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+              
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#date1' //指定元素
+                ,type: 'datetime'
+            });
+        });
+    </script>
+    <!-- layui 时间参数 结束-->
+
+
+
+
+</body>
+</html>
